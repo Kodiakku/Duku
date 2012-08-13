@@ -15,5 +15,7 @@ Even WITH all of these great, helpful features, Duku still maintains minimalism.
 Unique Features
 ===============
 ntk - The Noran Toolkit provides utilities for IRC bot developers, programming language designers, and mathematic application developers.
+
 bobcat - Bobcat is an extensive post-installation script
+
 sister - An icon set with minimalism in mind
