@@ -1,0 +1,9 @@
+Package: bobcat
+Version: 1
+Architecture: amd64
+Maintainer: Norton "dymatic" Jenkins <dominantshoe@gmail.com>
+Installed-Size: 100
+Depends: 
+Section: accessory
+Priority: optional
+Description: Set up a script to install packages and move files

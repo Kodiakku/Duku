@@ -1,0 +1,107 @@
+/*
+ *This program is free software distributed with no warrant, expressed or implied
+ *besides the hopes that the program is found useful. The program is licensed under 
+ *the GNU General Public License, revision 2. If you did not receive a copy of the 
+ *GNU GPL 2 with this program, please contact the Free Software Foundation.
+ *
+ *Bobcat version 1
+ *Authors: Dymatic, Kodiakku
+ */
+#ifndef BOBCAT_H
+#define BOBCAT_H
+
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <nsl.h>
+using namespace std;
+
+string file;//The package definition file
+
+/**
+ *Opts is for one line of file. It has a list of packages per line.
+ *There is also a boolean called nA which works with |. When nA is
+ *enabled, only one can be installed. Otherwise all are. Query is what
+ *to ask the user and command is what to execute.
+ */
+struct opts{
+  string query;
+  string command;
+  string choice;
+  vector<string> packages;
+  bool mult;
+  bool nA;
+  
+  opts(){}//Constructor never explicitly called
+};
+opts **allOpts;
+
+/**
+ *Reads the file in order to set up the options for running.
+ *
+ */
+void setUp(){
+  ifstream reader(file.c_str());//Read the package definition file
+  vector<string> packages;//Goes into opts[index]
+  string buff;//One line from the file
+
+  allOpts = new opts[linec(file)];//All opts initialized
+  for(int index=0; getline(reader, buff); index++)
+    {
+      allOpts[index].query=buff.substr(0, buff.find("_")-1);//Get what to ask the user
+
+      buff=buff.substr(buff.find("_")+1, buff.length());//Make buff equal to choices
+      
+      if(buff.find("|")!=-1){//Get multiple packages
+	allOpts[index].packages=splitOn(buff, "|");
+	mult=true;
+      }
+      else {
+	allOpts[index].choice = buff;
+	allOpts[index].mult=false;
+      }
+    }//End iteration
+}//End setup
+
+/**
+ *Ask the user and execute output
+ */
+void ask(){
+  string inp;
+  bool chosen=false;
+  for(int index=0; index<linec(file); index++)
+    {
+      chosen=false;
+      inp="";
+      cout << opts[index].query << " Type the name of the package: ";
+      cin  >> inp;
+      cout << endl;
+
+      for(int sindex=0; sindex<allOpts[index].capacity; sindex++){//CHECK CAPACITY
+      if(allOpts.mult){
+
+	if(inp==allOpts.packages[sindex])
+	  allOpts[index].choice=allOpts.packages[index];
+	chosen=true;
+	else if(inp.length()>2&&allOpts.packages[sindex].find(inp)!=-1)
+	  {
+	    allOpts[index].choice=allOpts.packages[index];
+	    chosen=true;
+	  }
+      }//END foundMult
+      }//END inner for
+           if (inp==allOpts[index].choice){
+	chosen=true;
+	}
+	
+	   if(chosen){
+	     allOpts[index].command="equo install "+allOpts[index].choice;
+	   }else allOPts[index].command="true";
+
+	   if(chosen){
+	     system(allOpts[index].c_str());
+	   }
+    }//END LOOP
+  
+}
+#endif BOBCAT_H

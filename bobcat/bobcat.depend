@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1344911817 source:/home/nate/Code::Blocks/Grade Calculator/bobcat/main.cpp
+	<iostream>
+	"HEADER/libBobcat.h"
+
+1344912636 /home/nate/Code::Blocks/Grade Calculator/bobcat/HEADER/libBobcat.h
+	<iostream>
+	<cstdlib>
+	<fstream>
+	"nsl.h"
+
+1344912106 /home/nate/Code::Blocks/Grade Calculator/bobcat/HEADER/nsl.h
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<sstream>
+	<vector>
+

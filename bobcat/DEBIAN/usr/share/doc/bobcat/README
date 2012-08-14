@@ -1,0 +1,24 @@
+===What is bobcat?
+Bobcat is an application used for startup scripts or general scripting in general. It does not require any particular shell and is cross-compatible.
+At the heart of the project is a configurable core that even a non-programmer could understand.
+
+===The def file
+The definition file has an ugly yet simple syntax.
+
+PROMPT_arg#command%arg2#command2
+
+Map: 
+Prompt is what the user sees
+arg is when to execute a certain command. "if(arg is found) execute this:
+command is what to execute at a shell.
+% acts as if the REPL is right after _
+
+Syntax key:
+_:Seperate prompt and the rest
+#:Separate arg from prompt
+%:Separate arg-prompt pairs
+
+===Command-line args
+-h or --help: Display help
+-v or --version: Display version
+arg: arg is the path to the def file.
