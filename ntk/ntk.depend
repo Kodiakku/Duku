@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1344956271 source:/home/nate/Code::Blocks/Grade Calculator/ntk/main.cpp
+	"nsl.h"
+	"mainHelper.h"
+
+1344953059 /home/nate/Code::Blocks/Grade Calculator/ntk/nsl.h
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<sstream>
+	<vector>
+
+1344956285 /home/nate/Code::Blocks/Grade Calculator/ntk/mainHelper.h
+	<fstream>
+	<iostream>
+

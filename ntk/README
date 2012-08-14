@@ -1,0 +1,98 @@
+=======================
+ntk - The Noran Toolkit
+=======================
+-------------------------------------------------------------------
+ntk is a suite of libraries that I have developed over a year of using C++. The range of the library is grand, going from ordering a file all the way to making a configuration file or parsing command line arguments. Here is an outline of the entire library since it is pretty small.
+-------------------------------------------------------------------
+=============
+mainHelper.h
+=============
+-------------------------------------------------------------------
+Tools relating to the configuration file and command line arguments go here.
+
+setGnus(int number) - Set the number of command line options directly. This should never have to be called.
+
+setVersion(int number) - Set the version of the program.
+
+setOptions(int number) - Set the number of options in the configuration file. This is important.
+
+setInfo(string name, string email) - Set your author info.
+
+setOptTrigs(vector<string> trigs) - Set your option triggers for the configuration file. For instance, an opt trig of "allow crunch" would cause "allow crunch false" to set "crunch" to false. Your boolean array must follow the same order as your opt trigs.
+
+struct config
+	--path - The path to the configuration file
+	--config() - Sets the default path
+	--isFalse(string line) - Returns true if the line is false in the configuration file.
+	--setOptions() - Sets the options in the settings wrapper structure. The path to the configuration file should already be manually set with setConfFile(string arg)
+	--loadConfig(bool arr) - Loads the configuration settings into a boolean array.
+
+setConfFile(string arg) - Make the path of the configuration file arg. This must be called before setOptions().
+
+struct cLineOption
+	--cLineOption(string longname, string shortname, bool quitAfter, bool parseForward, void(*gnuFun)(string)) - This is the hardest thing to get right. Longname is the long name of the argument. For instance, --help would be a long name. Shortname is the short name, like -h. QuitAfter is whether or not to terminate execution after running gnuFun. ParseForward is whether or not to use the argument in front of the trigger as the argument for gnuFun. Finally, gnuFun is a pointer to a function that takes a string as an argument.
+	--cLineOption() - Default constructor
+	--ifMathes(string arg) - If a command line argument matches a set cLineOption
+	--exec(string arg) - Executes the command with a string argument
+
+addcLineOption(cLineOption option) - Adds teh command line option to the vector of command line options and automatically adjusts the set number of cLineOptions.
+handleArgs(int argc, char**argv)-Runs through the command line arguments looking for a match in the vector of command line options. This must be called.
+
+~~~~~~~~~~~~~~
+EXAMPLE~~~~~~~
+~~~~~~~~~~~~~~
+void say(string arg){cout<<arg<<endl;}
+int main(int argc, char**argv){
+cLineOption foo("--say", "-s", true, false, &say);
+addcLineOption(foo);
+handleArgs(argc, argv);
+} 
+-------------------------------------------------------------------
+======
+nsl.h|
+======
+-------------------------------------------------------------------
+nsl.h is the standard noran library. It is unspecialized and just serves helper functions.
+
+linec(string fileName) - Returns the number of lines in a file.
+orderFile(string filePath) - Orders the file by line length.
+spew(string labels, int intensity)-Generates a password based on labels and intesity. View the internal doc for the specifics.
+numberOf(string message, string lookingFor) - Returns the number of lookingFor's in toFindIn.
+replaceAll(string&str, string&from, string&to)-Replaces all froms to tos in str.
+sanitizeInput(string input) - Removes punctuation and whitespace from the string.
+splitStr(string toSplit, string delim) - Remove text in between two delims and then the delims themselves. foo~hi~bar split with ~ would become foobar.
+rmComment(string &comment, char*delim) - Safely iterates splitStr through the string.
+splitOn(string message, string delim) - Returns a vector<string> with the message split on a delim.
+-------------------------------------------------------------------
+==========
+LibMath.h|
+==========
+LibMath is just a common math library with some powerful features.
+
+addAll(double data[], int dataLength) - Add all of the data in an array.
+square(double number) - Get the square of the number
+mean(double data[], int dataLength) - Get the mean of a set of data
+stdDev(double list[], int listLength) - Get the standard deviation of the data.
+rectangularArea(double length, double width) - Get the area of a rectangle.
+rectangularVolume(double length, double width, double height) - Get the volume of a rectangle.
+triangularArea(double base, double height) - Get the area of a triangle.
+pyramidVolume(double base, double height) - Get the volume of a pyramid.
+pythagSide(double hypotenuse, double sidea) - Get the missing side of a right triangle given the hypotenuse and a side.
+pyThagHypotenuse(double side1, double side2) - Get the hypotenuse when give two sides of a right triangle.
+circumference(double radius) - Get the circumference of a circle given the radius.
+circularArea(double radius) - Get the area of a circle when given the radius
+sphericalVolume(double radius) - Get the volume of a sphere when given the radius
+cylindricalArea(double radius, double height) - Get the volume of a cylinder.
+coneArea(double radius, double slant) - Get the area of a cone.
+coneVolume(double radius, double height) - Get the volume of a cone.
+densityOf(double mass, double volume) - Get the density of an object.
+convertCelciusToFahrenheit(double celcius) - Convert celcius into fahrenheit
+convertFahrenheitToCelcius(double fahrenheit) - Converts the celcius to fahrenheit
+convertFahrenheitToKelvin(double fahrenheit) - Convert the fahrenheit to kelvin.
+convertCelciusToKelvin(double celcius) - Convert celcius to kelvin
+convertKelvinToCelcius(double kelvin) - Convert kelvin to celcius
+convertKelvinToFahrenheit(double kelvin) - Converts the kelvin to fahrenheit
+microToSec(double microseconds) - Converts microseconds to seconds
+double secToMicro(double sec) - Converts seconds to microseconds
+-------------------------------------------------------------------
+-------------------------------------------------------------------
