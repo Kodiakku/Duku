@@ -14,6 +14,8 @@ Even WITH all of these great, helpful features, Duku still maintains minimalism.
 
 Unique Features
 ===============
-ntk - The Noran Toolkit provides utilities for IRC bot developers, programming language designers, and mathematic application developers.
+NTK - The Noran Toolkit provides utilities for IRC bot developers, programming language designers, and mathematic application developers. NTK is also very minimal, coming in at about 400 KB.
 
-bobcat - Bobcat is an extensive post-installation script made by us here at Duku Linux, Kodiak and 
+Bobcat - Bobcat is an extensive post-installation script made by us here at Duku Linux, Kodiak and dymatic.
+
+Durian - Durian is an easy GUI application made by yours truly (Kodiak) to be run on first boot that allows the user to customize his ZSH install in many ways, including syntax highlighting and extensive PS1 modifications and options.
